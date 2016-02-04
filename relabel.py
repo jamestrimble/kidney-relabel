@@ -29,6 +29,15 @@ def print_instance(vv):
     print "-1\t-1\t-1"
 
 if __name__ == "__main__":
+    ascending = False
+
+    if len(sys.argv) > 1:
+        arg = sys.argv[1]
+        if arg.lower()[:2] == "-a":
+            ascending = True
+        else:
+            raise KidneyError("Unknown command-line argument.")
+
     lines = sys.stdin.readlines()
     n_vertices, m_edges = [int(x) for x in lines[0].split()]
 
@@ -46,7 +55,7 @@ if __name__ == "__main__":
 
     vv = sorted(vv,
                 key=lambda v: len(v.edges_out) + len(v.edges_in),
-                reverse=True)
+                reverse=not ascending)
 
     for i, v in enumerate(vv):
         vv[i].id = i

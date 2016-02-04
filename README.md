@@ -9,3 +9,8 @@ writes the resulting instance to standard output.
 ```
 python relabel.py < a.input > b.input
 ```
+
+Or for non-decreasing order:
+```
+python relabel.py -a < a.input > b.input
+```
