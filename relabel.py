@@ -1,3 +1,4 @@
+import random
 import sys
 
 class KidneyError(Exception):
@@ -29,12 +30,14 @@ def print_instance(vv):
     print "-1\t-1\t-1"
 
 if __name__ == "__main__":
-    ascending = False
+    mode = "descending"
 
     if len(sys.argv) > 1:
         arg = sys.argv[1]
         if arg.lower()[:2] == "-a":
-            ascending = True
+            mode = "ascending"
+        elif arg.lower()[:2] == "-r":
+            mode = "random"
         else:
             raise KidneyError("Unknown command-line argument.")
 
@@ -53,9 +56,12 @@ if __name__ == "__main__":
         wt = float(tokens[2])
         add_edge(vv[src_id], vv[tgt_id], wt)
 
-    vv = sorted(vv,
-                key=lambda v: len(v.edges_out) + len(v.edges_in),
-                reverse=not ascending)
+    if mode == "random":
+        random.shuffle(vv)
+    else:
+        vv = sorted(vv,
+                    key=lambda v: len(v.edges_out) + len(v.edges_in),
+                    reverse=mode=="descending")
 
     for i, v in enumerate(vv):
         vv[i].id = i

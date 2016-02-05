@@ -6,11 +6,17 @@ writes the resulting instance to standard output.
 
 ## Usage
 
+Default (no arguments): non-increasing order.
 ```
 python relabel.py < a.input > b.input
 ```
 
-Or for non-decreasing order:
+Use `-a` flag for non-decreasing order...
 ```
 python relabel.py -a < a.input > b.input
+```
+
+... and -r flag for random order.
+```
+python relabel.py -r < a.input > b.input
 ```
